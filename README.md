@@ -1,2 +1,1 @@
-# nym-router
-A custom OpenWRT image with built-in privacy features and Nym-gateway 
+# NYM-r0uT3r
