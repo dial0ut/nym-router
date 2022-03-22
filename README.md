@@ -116,6 +116,9 @@ After these edits, run the `rust-musl-builder` container again but add an extra 
 This worked successfully on my Macbook Air M1. 
 
 ### Flash the OpenWRT image you downloaded in the first step and ssh to the box
+Here’s a simple guide [how you flash OpenWRT onto an SD card:](https://www.how2shout.com/how-to/balenaetcher-how-to-create-a-bootable-usb-flash-drive-using-etcher.html)
+
+
 **Note:** The current OpenWRT raspi4 64-bit image defaults to `192.168.1.1` so it will probably get in a conflict with your current router. You can get around this with connecting another router to your current router, run the OpenWRT router in dhcp-client and set its address to 192.168.1.1 and the 2nd router connected to your router to 192.168.1.2 *lulz*.
 
 We will fix this issue with a custom image of OpenWRT where this will all be set up properly. I have really no idea why the dev team of OpenWRT made such a decision which creates a pretty ANNOYING obstacle(!)
