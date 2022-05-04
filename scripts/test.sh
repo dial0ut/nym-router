@@ -11,7 +11,7 @@ NOCOLOR='\033[0m' # DEFAULT FONT
 
 # setting working directory
 #set -x
-WORK_DIR="${HOME}/nym-router-builder"
+WORK_DIR="${HOME}/nym-gateway-builder"
 check_dep() {
 if [ ! -e ${HOME}/.cargo/bin/cargo ]
 then 
@@ -29,7 +29,7 @@ fi
 check_dep
 create_dir() {
   printf "%b\n\n\n" "${WHITE} --------------------------------------------------------------------------------"
-  #printf "${WHITE}This script will create a directory in your ${LBLUE}${HOME} ${WHITE}directory${WHITE} called ${YELLOW}nym-router-builder${WHITE}\n"
+  #printf "${WHITE}This script will create a directory in your ${LBLUE}${HOME} ${WHITE}directory${WHITE} called ${YELLOW}nym-gateway-builder${WHITE}\n"
   #echo
   printf "%b\n\n\n" " ${LGREEN}
   
@@ -43,12 +43,12 @@ o   o   o   o   o      o-o  O-o  o-o o  o   o   o   o   o   o
   
   if [ ! -d ${WORK_DIR} ]
   then 
-  printf "${WHITE}This script will create a directory in your ${LBLUE}${HOME} ${WHITE}directory${WHITE} called ${YELLOW}nym-router-builder${WHITE}\n"
+  printf "${WHITE}This script will create a directory in your ${LBLUE}${HOME} ${WHITE}directory${WHITE} called ${YELLOW}nym-gateway-builder${WHITE}\n"
   printf "%b\n\n\n"  
     while true ; do
         read -p  $'\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;37m] Do you want to continue \e[1;92mYes - (Yy) \e[1;37m or  \e[1;91mNo - (Nn)  ?? :  \e[0m' yn
         case $yn in
-            [Yy]* ) mkdir -p $HOME/nym-router-builder && break;;
+            [Yy]* ) mkdir -p $HOME/nym-gateway-builder && break;;
             [Nn]* ) exit;;
         esac
     done
@@ -100,22 +100,21 @@ init_openwrt_branch() {
 	git pull --tags
 }
 
-#init_openwrt_link() {
-#	cd ${WORK_DIR}/openwrt
-#
-#	chown 1000:1000 /src -R
-#
-#	mkdir -p src/dl
-#	mkdir -p src/staging_dir
-#	mkdir -p src/build_dir
-#	mkdir -p src/tmp
-#	mkdir -p src/bin
-#
-#	ln -s /src/dl ${WORK_DIR}/openwrt/dl
-#	ln -s /src/staging_dir ${WORK_DIR}/openwrt/staging_dir
-#	ln -s /src/build_dir ${WORK_DIR}/openwrt/build_dir
-#	ln -s /src/tmp ${WORK_DIR}/openwrt/tmp
-#}
+init_openwrt_link() {
+	cd ${WORK_DIR}/openwrt
+
+	chown 1000:1000 src -R
+	mkdir -p src/dl
+	mkdir -p src/staging_dir
+	mkdir -p src/build_dir
+	mkdir -p src/tmp
+	mkdir -p src/bin
+
+	ln -sf src/dl ${WORK_DIR}/openwrt/dl
+	ln -sf src/staging_dir ${WORK_DIR}/openwrt/staging_dir
+	ln -sf src/build_dir ${WORK_DIR}/openwrt/build_dir
+	ln -sf src/tmp ${WORK_DIR}/openwrt/tmp
+}
 
 update_install_openwrt_feeds() {
 	cd ${WORK_DIR}/openwrt
@@ -157,10 +156,10 @@ git_clone_nym(){
 openwrt_install_nym-router_feeds() {
 	cd ${WORK_DIR}/openwrt
 
-	echo "src-git nym-router https://github.com/The-Pacific-NW-Rural-Broadband-Alliance/nym-router" >> feeds.conf.default
+	echo "src-git nym-gateway https://github.com/The-Pacific-NW-Rural-Broadband-Alliance/nym-gateway" >> feeds.conf.default
 
-	./scripts/feeds update nym-router
-	./scripts/feeds install nym-router
+	./scripts/feeds update nym-gateway
+	./scripts/feeds install nym-gateway
 }
 
 openwrt_install_package_nym-router_config() {
@@ -171,7 +170,7 @@ openwrt_install_package_nym-router_config() {
 	echo "CONFIG_PACKAGE_nym-router-dev=m" >> ${WORK_DIR}/openwrt/.config
 }
 
-create_dir #&& mkdir -p $HOME/nym-router-builder && printf "%b\n\n\n" "${WHITE} ${LGREEN}Nym-${LBLUE}OpenWRT${WHITE} will be built in ${YELLOW} $WORK_DIR"
+create_dir #&& mkdir -p $HOME/nym-gateway-builder && printf "%b\n\n\n" "${WHITE} ${LGREEN}Nym-${LBLUE}OpenWRT${WHITE} will be built in ${YELLOW} $WORK_DIR"
 
 download_openwrt
 change_openwrt_branch
