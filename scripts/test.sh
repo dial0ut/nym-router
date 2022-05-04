@@ -153,10 +153,10 @@ git_clone_nym(){
   git checkout tags/v0.12.1
 }
 
-openwrt_install_nym-router_feeds() {
+openwrt_install_nym-gateway_feeds() {
 	cd ${WORK_DIR}/openwrt
 
-	echo "src-git nym-gateway https://github.com/The-Pacific-NW-Rural-Broadband-Alliance/nym-gateway" >> feeds.conf.default
+	echo "src-git nym-gateway https://github.com/nymtech/nym.git;v0.12.1" >> feeds.conf.default
 
 	./scripts/feeds update nym-gateway
 	./scripts/feeds install nym-gateway
@@ -165,9 +165,9 @@ openwrt_install_nym-router_feeds() {
 openwrt_install_package_nym-router_config() {
 	cd ${WORK_DIR}/openwrt
 
-	echo "CONFIG_FEED_nym-router=y" >> ${WORK_DIR}/openwrt/.config
-	echo "CONFIG_PACKAGE_nym-router=m" >> ${WORK_DIR}/openwrt/.config
-	echo "CONFIG_PACKAGE_nym-router-dev=m" >> ${WORK_DIR}/openwrt/.config
+	echo "CONFIG_FEED_nym-gateway=y" >> ${WORK_DIR}/openwrt/.config
+	echo "CONFIG_PACKAGE_nym-gateway=m" >> ${WORK_DIR}/openwrt/.config
+	echo "CONFIG_PACKAGE_nym-gateway-dev=m" >> ${WORK_DIR}/openwrt/.config
 }
 
 create_dir #&& mkdir -p $HOME/nym-gateway-builder && printf "%b\n\n\n" "${WHITE} ${LGREEN}Nym-${LBLUE}OpenWRT${WHITE} will be built in ${YELLOW} $WORK_DIR"
@@ -180,8 +180,8 @@ update_install_openwrt_feeds
 openwrt_init_config
 openwrt_make_build_env
 openwrt_make
-openwrt_install_nym-router_feeds
-openwrt_install_package_nym-router_config
+openwrt_install_nym-gateway_feeds
+openwrt_install_package_nym-gateway_config
 #cross build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features vendored-openssl
 
 
