@@ -141,48 +141,68 @@ openwrt_make_build_env() {
 
 openwrt_make() {
 	cd ${WORK_DIR}/openwrt
+  
+  
   #git clone https://github.com/nymtech/nym.git
   #git checkout tags/v0.12.1
 	#cross build --bins nym-gateway --release #--target aarch64-unknown-linux-musl  --features vendored-openssl
-  make -j4
+	make defconfig
+	make -j4 download
+ 	make -j4 tools/install
+ 	make -j4 toolchain/install
 }
-git_clone_nym(){
-  cd ${WORK_DIR}/openwrt
-  git clone https://github.com/nymtech/nym.git
-  cd nym
-  git checkout tags/v0.12.1
-}
+#git_clone_nym(){
+  #cd ${WORK_DIR}/openwrt
+  #git clone https://github.com/nymtech/nym.git
+  #cd nym
+  #git checkout tags/v0.12.1
+#}
 
 openwrt_install_nym-gateway_feeds() {
 	cd ${WORK_DIR}/openwrt
 
-	echo "src-git nym-gateway https://github.com/nymtech/nym.git;v0.12.1" >> feeds.conf.default
+	echo "src-git nym https://github.com/nymtech/nym.git;v0.12.1" >> feeds.conf.default
 
 	./scripts/feeds update nym-gateway
 	./scripts/feeds install nym-gateway
+	## TODO: Add checks to do not add duplicates ! Else the feeds script will tell you to gth. Simple grep one-liner will work! 
 }
 
-openwrt_install_package_nym-router_config() {
+openwrt_install_package_nym-gateway_config() {
 	cd ${WORK_DIR}/openwrt
 
 	echo "CONFIG_FEED_nym-gateway=y" >> ${WORK_DIR}/openwrt/.config
 	echo "CONFIG_PACKAGE_nym-gateway=m" >> ${WORK_DIR}/openwrt/.config
 	echo "CONFIG_PACKAGE_nym-gateway-dev=m" >> ${WORK_DIR}/openwrt/.config
 }
+openwrt_make_nym-gateway_package(){
+	cd ${WORK_DIR}/openwrt
 
+
+	make defconfig  -j1 V=sc
+	make package/nym-gateway/clean  -j1 V=sc
+	make package/nym-gateway/compile -j1 V=sc
+}
 create_dir #&& mkdir -p $HOME/nym-gateway-builder && printf "%b\n\n\n" "${WHITE} ${LGREEN}Nym-${LBLUE}OpenWRT${WHITE} will be built in ${YELLOW} $WORK_DIR"
 
-download_openwrt
-change_openwrt_branch
-init_openwrt_branch
-init_openwrt_link
-update_install_openwrt_feeds
-openwrt_init_config
-openwrt_make_build_env
-openwrt_make
-openwrt_install_nym-gateway_feeds
-openwrt_install_package_nym-gateway_config
-#cross build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features vendored-openssl
+#download_openwrt
+#change_openwrt_branch
+#init_openwrt_branch
+#init_openwrt_link
+#update_install_openwrt_feeds
+#openwrt_init_config
+#penwrt_make_build_env
+#openwrt_make
+#openwrt_install_nym-gateway_feeds
+openwrt_install_package_nym-gateway_config 
+openwrt_make_nym-gateway_package
+## If build fails because of OpenSSL, 
+## we need to edit the Cargo.toml a bit 
+## ... somehow from somepath ... <function> && cp /home/hans/development/nu-router/nym-router/Cargo.toml <somepath>
+
+
+## This is how you cross-compile binaries on Linux x86_64 distro
+## cross build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features vendored-openssl
 
 
 

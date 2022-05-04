@@ -81,7 +81,7 @@ define Build/Compile
 	CROSS_COMPILE=$(CROSS_PREFIX) \
 	RUSTFLAGS="-C linker=$(TARGET_CC_NOCACHE) -C ar=$(TARGET_AR)" \
 	RUSTC="$(CARGO_HOME)/bin/rustc" \
-	"$(CARGO_HOME)/bin/cargo" build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features 'vendored-openssl' --manifest-path $(PKG_BUILD_DIR)/gateway/Cargo.toml
+	$(CARGO_HOME)/bin/cargo" build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features 'vendored-openssl' --manifest-path $(PKG_BUILD_DIR)/gateway/Cargo.toml
 endef
 
 define Package/nym-gateway
