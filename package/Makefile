@@ -26,7 +26,7 @@ PKG_LICENSE_FILES:=COPYING
 #PKG_CPE_ID:=cpe:/a:nym-router:nym-router
 PKG_MIRROR := skip
 
-PKG_BUILD_DEPENDS:=rust/host
+#PKG_BUILD_DEPENDS:=rust/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_DIR:=${HOME}/nym-gateway-builder/openwrt/nym
 #cross build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features vendored-openssl
@@ -70,7 +70,7 @@ CONFIGURE_VARS += \
         RUSTFLAGS=$(RUSTFLAGS)
 
 define Build/Compile
-	cd $(PKG_BUILD_DIR) && $(TARGET_CONFIGURE_OPTS) $(CONFIGURE_VARS) cargo update && \
+	cd $(PKG_BUILD_DIR) && git checkout tags/v0.12.1 && $(TARGET_CONFIGURE_OPTS) $(CONFIGURE_VARS) cargo update && \
 	$(TARGET_CONFIGURE_OPTS) $(CONFIGURE_VARS) \
   source $(CARGO_HOME)/env && \
 	CARGO_HOME=$(CARGO_HOME) \

@@ -161,10 +161,10 @@ openwrt_make() {
 openwrt_install_nym-gateway_feeds() {
 	cd ${WORK_DIR}/openwrt
 
-	echo "src-git nym https://github.com/nymtech/nym.git;v0.12.1" >> feeds.conf.default
+	echo "src-git nym https://gitlab.com/gyrusdentatus1/deletethis.git;develop" >> feeds.conf.default
 
-	./scripts/feeds update nym-gateway
-	./scripts/feeds install nym-gateway
+	./scripts/feeds update nym
+	./scripts/feeds install nym
 	## TODO: Add checks to do not add duplicates ! Else the feeds script will tell you to gth. Simple grep one-liner will work! 
 }
 
