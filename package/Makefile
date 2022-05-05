@@ -26,7 +26,7 @@ PKG_LICENSE_FILES:=COPYING
 #PKG_CPE_ID:=cpe:/a:nym-router:nym-router
 PKG_MIRROR := skip
 
-#PKG_BUILD_DEPENDS:=rust/host
+PKG_BUILD_DEPENDS:=rust/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_DIR:=${HOME}/nym-gateway-builder/openwrt/nym
 #cross build --bins nym-gateway --release --target aarch64-unknown-linux-musl  --features vendored-openssl
