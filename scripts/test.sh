@@ -194,7 +194,7 @@ create_dir #&& mkdir -p $HOME/nym-gateway-builder && printf "%b\n\n\n" "${WHITE}
 #penwrt_make_build_env
 #openwrt_make
 #openwrt_install_nym-gateway_feeds
-openwrt_install_package_nym-gateway_config 
+#openwrt_install_package_nym-gateway_config 
 openwrt_make_nym-gateway_package
 ## If build fails because of OpenSSL, 
 ## we need to edit the Cargo.toml a bit 
