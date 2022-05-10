@@ -1,0 +1,19 @@
+--- a/gateway/Cargo.toml
++++ b/gateway/Cargo.toml
+@@ -25,6 +25,8 @@ futures = "0.3"
+ humantime-serde = "1.0.1"
+ log = "0.4"
+ once_cell = "1.7.2"
++openssl-sys = { version = "0.9.72", optional = true, features = ["vendored"] }
++openssl = { version = "0.10.37", optional = true, features = ["vendored"] }
+ pretty_env_logger = "0.4"
+ rand = "0.7"
+ serde = { version = "1.0.104", features = ["derive"] }
+@@ -57,6 +59,7 @@ version-checker = { path = "../common/ve
+ [features]
+ coconut = ["coconut-interface", "gateway-requests/coconut", "gateway-client/coconut", "credentials/coconut"]
+ eth = []
++vendored-openssl = ["openssl/vendored"]
+
+ [build-dependencies]
+ tokio = { version = "1.4", features = ["rt-multi-thread", "macros"] }
