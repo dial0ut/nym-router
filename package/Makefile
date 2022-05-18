@@ -34,11 +34,13 @@ include $(TOPDIR)/package/feeds/packages/rust/rustc_environment.mk
 
 
 define Package/nym
-^ITITLE:=nym
-^ISECTION:=testing
-^ICATEGORY:=Testing
-^IDEPENDS:=@!SMALL_FLASH @!LOW_MEMORY_FOOTPRINT
+  SECTION:=net
+  CATEGORY:=Utilities
+  SUBMENU:=Nym
+  TITLE:=Nym Gateway
+^IDEPENDS:=@!SMALL_FLASH @!LOW_MEMORY_FOOTPRINT +ca-certificates +pkg-config +build-essential
 ^IURL:=https://github.com/nymtech/nym
+PKG_BUILD_DEPENDS:=openssl
 endef
 
 define Package/nym/description
