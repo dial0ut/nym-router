@@ -21,34 +21,68 @@ PKG_LICENSE_FILES:=LICENSE-APACHE LICENSE-MIT
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2022-05-06
-PKG_SOURCE_VERSION:=skip
+PKG_SOURCE_VERSION:=c3d908642afdacccda701134c7f77691abb6481b
 PKG_SOURCE_URL:=https://github.com/nymtech/nym.git
-PKG_MIRROR_HASH:=skip
+#PKG_MIRROR_HASH:=skip
 
 PKG_BUILD_DEPENDS:=rust/host
+
+RUST_TRIPLE:=aarch64-unknown-linux-musl
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/package/feeds/packages/rust/rustc_environment.mk
 
-define Build/Compile
-$(call RustPackage/Cargo/Update)
-$(call RustPackage/Cargo/Compile)
-endef
 
 define Package/nym
-^ITITLE:=nym
-^ISECTION:=testing
-^ICATEGORY:=Testing
-^IDEPENDS:=@!SMALL_FLASH @!LOW_MEMORY_FOOTPRINT
+  SECTION:=net
+  CATEGORY:=Utilities
+  SUBMENU:=Nym
+  TITLE:=Nym Gateway
+^IDEPENDS:=@!SMALL_FLASH @!LOW_MEMORY_FOOTPRINT +ca-certificates +pkg-config +build-essential
 ^IURL:=https://github.com/nymtech/nym
+PKG_BUILD_DEPENDS:=openssl
 endef
 
 define Package/nym/description
 ^Inym Rust-lang package
 endef
 
-define Package/nym/install
-$(INSTALL_DIR) $(1)/bin
-$(INSTALL_BIN) $(PKG_BUILD_DIR)/target/$(RUSTC_TARGET_ARCH)/release/nym $(1)/bin/nym
+## The older and proper way I guess. 
+#define Build/Compile
+#$(call RustPackage/Cargo/Update)
+#$(call RustPackage/Cargo/Compile)
+#endef
+
+## THE HACKY WAY TO BUILD IT ... 
+## FROM MR. JUSTIN! 
+## THX JUSTIN ! 
+##
+NYM_PATH:="$(PKG_BUILD_DIR)/target/$(RUST_TRIPLE)/release/nym-gateway"
+
+define Build/Compile
+	(\
+		cd $(PKG_BUILD_DIR) && \
+		cargo install cross && \
+		cross build --release --target $(RUST_TRIPLE) --bin nym-gateway -r\
+	)
+	$(STRIP) $(NYM_PATH)
 endef
+
+#NYM_PATH:="$(PKG_BUILD_DIR)/target/$(RUST_TRIPLE)/release/nym-gateway"
+
+
+##
+## JUSTIN'S WAY
+define Package/nym/install
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(NYM_PATH) $(1)/usr/sbin/nym-gateway
+	$(INSTALL_DIR) $(1)/etc/init.d
+endef
+
+## The old way which will work later! 
+##
+#define Package/nym/install
+#$(INSTALL_DIR) $(1)/bin
+#$(INSTALL_BIN) $(PKG_BUILD_DIR)/target/$(RUSTC_TARGET_ARCH)/release/nym $(1)/bin/nym
+#endef
 $(eval $(call BuildPackage,nym))
