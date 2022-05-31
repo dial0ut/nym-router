@@ -1,4 +1,23 @@
 # Nym-gateway 
+## ---DEV---
+
+1. vim scripts/README.md # or less or cat or whatever you prefer  
+2. bash scripts/test.sh 
+
+TODO: after the OpenWRT gets built by the script, then the package build itself will probably fail for various reasons. My main problem with all this is that Rust is not supported by default and it's really hacky. 
+Right now, after I get a new OpenWRT built, I can have a better look at what happened there if it does not work :P 
+
+#### Possible issues within the makefile:
+- wrong paths
+- wrong dir structure
+- wrong names
+- ln 's 
+- rustflags
+- cross (cargo module for cross-compiling)
+- feeds.default in Openwrt/ throwing syntax err and I have no idea why ! More details on that [here](https://openwrt.org/docs/guide-developer/feeds) 
+- some noob mistakes and general messiness ? 
+-------------------------------------------------------------------------------
+
 ## OpenWRT images
 [raspi links](https://openwrt.org/toh/raspberry_pi_foundation/raspberry_pi)
 [raspi4-aarch64 v21.02.1](https://downloads.openwrt.org/releases/21.02.1/targets/bcm27xx/bcm2711/openwrt-21.02.1-bcm27xx-bcm2711-rpi-4-squashfs-sysupgrade.img.gz)
