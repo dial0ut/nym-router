@@ -23,7 +23,7 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2022-05-06
 PKG_SOURCE_VERSION:=c3d908642afdacccda701134c7f77691abb6481b
 PKG_SOURCE_URL:=https://github.com/nymtech/nym.git
-#PKG_MIRROR_HASH:=skip
+PKG_MIRROR_HASH:=04ff2b5421dee0fe7749213e725e014888793b34e56814ba8b2ebe6d2f4f2762
 
 PKG_BUILD_DEPENDS:=rust/host
 
@@ -48,27 +48,27 @@ define Package/nym/description
 endef
 
 ## The older and proper way I guess. 
-#define Build/Compile
-#$(call RustPackage/Cargo/Update)
-#$(call RustPackage/Cargo/Compile)
-#endef
+define Build/Compile
+$(call RustPackage/Cargo/Update)
+$(call RustPackage/Cargo/Compile)
+endef
 
 ## THE HACKY WAY TO BUILD IT ... 
 ## FROM MR. JUSTIN! 
 ## THX JUSTIN ! 
 ##
-NYM_PATH:="$(PKG_BUILD_DIR)/target/$(RUST_TRIPLE)/release/nym-gateway"
-
-define Build/Compile
-	(\
-		cd $(PKG_BUILD_DIR) && \
-		cargo install cross && \
-		cross build --release --target $(RUST_TRIPLE) --bin nym-gateway -r\
-	)
-	$(STRIP) $(NYM_PATH)
-endef
-
 #NYM_PATH:="$(PKG_BUILD_DIR)/target/$(RUST_TRIPLE)/release/nym-gateway"
+#
+#define Build/Compile
+#	(\
+#		cd $(PKG_BUILD_DIR) && \
+#		cargo install cross && \
+#		cross build --release --target $(RUST_TRIPLE) --bin nym-gateway -r\
+#	)
+#	$(STRIP) $(NYM_PATH)
+#endef
+#
+##NYM_PATH:="$(PKG_BUILD_DIR)/target/$(RUST_TRIPLE)/release/nym-gateway"
 
 
 ##
