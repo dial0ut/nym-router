@@ -1,6 +1,17 @@
 # Nym-gateway 
 
 -------------------------------------------------------------------------------
+## Rough 2 min summary:
+
+1. clone OpenWRT repo
+2. add this repo to the feeds list in Openwrt/ ... like this: `src-git-full nym <url.git;develop>`  
+3. run `./scripts/feeds update -a` and then `./scripts/feeds install -a`
+3. in Openwrt/ - make menuconfig (meh)
+4. set the toolchain and targets etc for Raspi 4, (brm27xx?)
+5. save and get out of that hellish gui menu
+6. `make`
+7. wait forever until it compiles the toolchain 
+8. `make package/feeds/nym/package/compile V=sc`
 
 ## OpenWRT images
 [raspi links](https://openwrt.org/toh/raspberry_pi_foundation/raspberry_pi)
