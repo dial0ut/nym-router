@@ -1,0 +1,13 @@
+Package: nym
+Version: 0.12.1-1
+Depends: libc
+Source: feeds/nym/package
+SourceName: nym
+License: Apache-2.0 MIT
+LicenseFiles: LICENSE-APACHE LICENSE-MIT
+Section: net
+SourceDateEpoch: 1653681898
+Maintainer: Hans Bricks <hans@nwbroadbandalliance.org>
+Architecture: aarch64_generic
+Installed-Size: 4334309
+Description:  ^Inym Rust-lang package
