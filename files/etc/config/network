@@ -1,0 +1,41 @@
+
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fdca:49a3:1724::/48'
+
+config device
+	option name 'br-lan'
+	option type 'bridge'
+	list ports 'eth0'
+
+config interface 'lan'
+	option device 'br-lan'
+	option proto 'static'
+	option netmask '255.255.255.0'
+	option ip6assign '60'
+	option ipaddr '192.168.1.111'
+	option gateway '192.168.1.1'
+	option dns '192.168.1.1'
+
+config interface 'vpn'
+	option proto 'wireguard'
+	option private_key 'woasdasdN38MGjXBasdasd6KUABOLLOCKSHACKERS3gPsBMxCJz2zyjMgE9i6ExxhE4='
+	list addresses '10.10.10.2/24'
+	option peerdns '0'
+	list dns '1.1.1.1'
+
+config wireguard_vpn 'wgserver'
+	option preshared_key 'GtL7fZc/bLnqZldBRUHpVofMCD6hDjNOWAYFUU='
+	option endpoint_host '37.235.104.103'
+	option endpoint_port '51820'
+	option route_allowed_ips '1'
+	option persistent_keepalive '25'
+	list allowed_ips '0.0.0.0/0'
+	list allowed_ips '::/0'
+	option public_key 'SomB53QZtCqAYHEiJ9CD0FpkWJ7KRtOXZYZOsHGDDUQ='
+
