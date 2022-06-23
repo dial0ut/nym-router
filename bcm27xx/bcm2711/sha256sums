@@ -1,0 +1,11 @@
+f971d18a3c9d35a8d575e3f15f54b0023800dca9fd547e9e4551b4098cc30042 *openwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img
+4cb9eb6f92e6ce8864a9325f71d06be7cfd1d1680f0134627c67a77f7322123a *openwrt-bcm27xx-bcm2711-rpi-4-ext4-sysupgrade.img.gz
+8abc04482c7af2657014d2dd7ddf12258604beba8ee576c47e642225c76f4eed *openwrt-bcm27xx-bcm2711-rpi-4-squashfs-factory.img.gz
+383d89b911dc1ccebe09e990f8ee89df16c3a9efb3f439100251c4834ea42fff *openwrt-bcm27xx-bcm2711-rpi-4-squashfs-sysupgrade.img.gz
+0b75c49df1fdc78dab9504ae2cac0e8bda1a91a74af7136245ae48e72052b319 *openwrt-bcm27xx-bcm2711-rpi-4.manifest
+3c78469b40564ce3990d87aab8c49962af8f09cb4ed622c97b762b382d0df434 *openwrt-nymbox-v0.1.0-bcm27xx-bcm2711-rpi-4-ext4-factory.img.gz
+ac79e7e5c53d49bbf6874735edad4dff1d234cbb0a600fb315f53c9ce4a81734 *openwrt-nymbox-v0.1.0-bcm27xx-bcm2711-rpi-4-ext4-sysupgrade.img.gz
+aeaf3deff57ccb0e24997f566b03d83061c6a3f07c679ca7d5587c022fd44f9e *openwrt-nymbox-v0.1.0-bcm27xx-bcm2711-rpi-4-squashfs-factory.img.gz
+8771959f93b82a311503ad75a67e6b77317849f7b64efcb9026d8a6012676ff9 *openwrt-nymbox-v0.1.0-bcm27xx-bcm2711-rpi-4-squashfs-sysupgrade.img.gz
+8367db322a3b37c11881b9b19ccbd19dafa43c180a6f12af4dcf1f85b1acdb88 *openwrt-nymbox-v0.1.0-bcm27xx-bcm2711-rpi-4.manifest
+9cb813d6956563b732cd27b894650999c930769a64a164c418317793469e8817 *profiles.json

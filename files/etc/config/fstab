@@ -1,0 +1,31 @@
+
+config global
+	option anon_swap '0'
+	option anon_mount '0'
+	option auto_swap '1'
+	option auto_mount '1'
+	option delay_root '5'
+	option check_fs '0'
+
+config mount
+	option target '/boot'
+	option uuid 'C90C-264D'
+	option enabled '0'
+
+config mount
+	option target '/'
+	option uuid 'ff313567-e9f1-5a5d-9895-3ba130b4a864'
+	option enabled '0'
+
+config mount
+	option uuid '1e69f582-7a50-43b9-a020-9e2784562d64'
+	option target '/home'
+	option enabled '1'
+	option options 'noatime'
+
+config mount
+	option uuid 'b6d31513-4518-4569-892f-9e057cfa2889'
+	option target '/srv'
+	option enabled '1'
+	option options 'noatime'
+
